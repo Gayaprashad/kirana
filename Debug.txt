@@ -1,0 +1,9 @@
+1) change the code such that if i delete the customer the user account associated with the customer is also deleted.
+
+
+
+STOPPED AT
+----------
+
+created model of temp_order
+working on getting the current user

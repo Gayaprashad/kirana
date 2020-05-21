@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="container">
+    <p>Welcome {{user.username}}</p>
+    <h1>Cart</h1>
+    <table class="table">
+      <thead>
+        <th scope="col">#</th>
+        <th scope="col">Item</th>
+        <th scope="col">Image</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Delete</th>
+      </thead>
+      <tbody>
+        {% if itemsL %}
+          {% for itemL in itemsL%}
+          <tr>
+            <th scope="row"> {{itemL.item.id}}</th>
+            <td> {{itemL.item.name}}</td>
+            <td> <img src="{{itemL.item.picture.url}}" alt="{{itemL.item.name}}">  </td>
+            <td> {{itemL.item.price}} per Kg</td>
+            <td> {{itemL.quantity}} </td>
+            <td> <a class="btn btn-primary" href="{% url 'remcart' itemL.item.id%}">Delete</a> </td>
+          </tr>
+          {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+    <p>The total price is : {{sum}}</p>
+    <a class="btn btn-primary" href="{% url 'order' %}"> Place order</a>
+  </div>
+{% endblock %}
