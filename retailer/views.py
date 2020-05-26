@@ -105,26 +105,7 @@ def delivery_listing(request,cust_id):
         alt_cust =cust
         user_customer =User.objects.filter(id=cust.user.id)
     orders = Order.objects.filter(user= alt_cust.user)
-    # item_list=[]
-    # for item in items:
-    #     item_list.append(item)
-    #     print (item)
-    # print (type(items))
-
-    # class Set:
-
-    #     def __init__(self,user,customer,items):
-    #         self.customer = customer
-    #         self.items =items
-        
-    #     def return_customer(self):
-    #         return self.customer
-
-    #     def return_items(self):
-    #         return self.items
-
-    # c_set = Set(user,alt_cust,items)
-
+    
     context={
         'customer': alt_cust,
         'user_customer': user_customer,

@@ -39,7 +39,7 @@
               <form action="{%url 'fulfilled' item.id%}" method ="POST"> 
                 {%csrf_token%}
                 <input type="hidden" name="cust_id" value="{{item.id}}">
-                <button type ="submit" name="submit" value="submit">Fulfilled</button>
+                <button type ="submit" class="btn btn-primary" name="submit" value="submit">Fulfilled</button>
               </form>
             </td>
           </tr>
