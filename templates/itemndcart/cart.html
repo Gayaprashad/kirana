@@ -2,8 +2,12 @@
 
 {% block content %}
 <div class="container">
-    <p>Welcome {{user.username}}</p>
     <h1>Cart</h1>
+    <div class="float-right">
+      <a class ='btn btn-primary' href="{% url 'item'%}">Continue Shopping</a>
+    </div>
+    <br>
+    <br>
     <table class="table">
       <thead>
         <th scope="col">#</th>
@@ -19,7 +23,7 @@
           <tr>
             <th scope="row"> {{itemL.item.id}}</th>
             <td> {{itemL.item.name}}</td>
-            <td> <img src="{{itemL.item.picture.url}}" alt="{{itemL.item.name}}">  </td>
+            <td> <img src="{{itemL.item.picture.url}}" alt="{{itemL.item.name}}" class="img-item">  </td>
             <td> {{itemL.item.price}} per Kg</td>
             <td> {{itemL.quantity}} </td>
             <td> <a class="btn btn-primary" href="{% url 'remcart' itemL.item.id%}">Delete</a> </td>

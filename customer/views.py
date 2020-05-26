@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages,auth
 from django.contrib.auth.models import User
+from orderndmisc.models import Temporder
 from .models import Customer
 
 # Create your views here.
@@ -44,13 +45,17 @@ def register(request):
                     messages.error(request,'That email is already exists')
                     return redirect('register')
                 else:                  
-                    user= User.objects.create_user(username=userName, email=email, password=password)            
-                    user.save()
-                    cust = Customer(user=user,userName=userName , phno= phno, adl1= adl1, adl2=adl2, locality= locality, city=city, zipcode= zipcode)
-                    print(cust)
-                    cust.save()       
-                    messages.success(request,'The Customer is successfully registered')
-                    return render(request,'customer/login.html')
+                    if Customer.objects.filter(phno =phno).exists():
+                        messages.error(request,'The phone number already exists')
+                        return redirect('register')
+                    else:
+                        user= User.objects.create_user(username=userName, email=email, password=password)            
+                        user.save()
+                        cust = Customer(user=user,userName=userName , phno= phno, adl1= adl1, adl2=adl2, locality= locality, city=city, zipcode= zipcode)
+                        print(cust)
+                        cust.save()       
+                        messages.success(request,'The Customer is successfully registered')
+                        return render(request,'customer/login.html')
         else:
             messages.error(request,'Passwords do not match')
             return render(request,'customer/register.html')
@@ -60,5 +65,6 @@ def register(request):
 def logout(request):
     if request.method=='POST':
         auth.logout(request)
+        Temporder.objects.all().delete()
         messages.success(request,'You are successfully logged out')
         return redirect('index')

@@ -8,11 +8,11 @@
       <form action="{% url 'register'%}" method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label>userName :</label>
+          <label>User Name :</label>
           <input type="text" name="name" id="name" class="form-control">
         </div>
         <div class="form-group">
-          <label>Passwrod :</label>
+          <label>Password :</label>
           <input type="password" name="password" id="password" class="form-control">
         </div>
         <div class="form-group">

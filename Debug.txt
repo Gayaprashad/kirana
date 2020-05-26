@@ -1,6 +1,8 @@
 1) change the code such that if i delete the customer the user account associated with the customer is also deleted.
 
+2) if a user logsout after palacing an item in the cart the temp_order table is not erased erase it also
 
+3) add button at the 
 
 STOPPED AT
 ----------

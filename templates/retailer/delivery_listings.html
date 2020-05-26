@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<div class="container">
+    <p>welcome{{user.username}}</p>        
+
+    <table class="table">
+      <thead>
+        <th scope="col">Customer</th>
+        <th scope="col">No of items</th>
+        <th scope="col">Locality</th>
+      </thead>
+      <tbody>
+          {% if sets %}
+              {%for set in sets%}
+                  <tr>
+                    <td><a href="{% url 'delivery_listing' set.unique_user.id%}">{{set.unique_user.userName}}</a> </td>
+                    <td>{{set.count}}</td>
+                    <td>{{set.locality}}</td>
+                  </tr>
+              {% endfor %}
+          {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

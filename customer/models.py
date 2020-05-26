@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Customer (models.Model):
-    user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     userName =models.CharField(max_length=40)
     phno = models.BigIntegerField()
     adl1= models.TextField()

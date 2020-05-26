@@ -10,20 +10,24 @@
         <th scope="col">Image</th>
         <th scope="col">Price</th>
         <th scope="col">Quantity</th>
-        <th scope="col">Order</th>
+        <th scope="col">Add to Cart</th>
       </thead>
       <tbody>
         {% if items %}
           {% for item in items%}
             <tr>
-              <form action="{% url 'addcart'%}" method='POST'>
+              {% if user.is_authenticated %}
+                <form action="{% url 'addcart'%}" method='POST'>                
+              {%else%}
+                <form action="{% url 'emptyuser'%}" method='POST'>
+              {% endif %}
                 {% csrf_token %}
                 <th scope="row">{{item.id}} <input type="hidden" name="id" value="{{item.id}}">  </th>
                 <td> {{item.name}}</td>
                 <td> <img src="{{item.picture.url}}" alt="{{item.name}}" class="img-item">  </td>
                 <td> {{item.price}} per Unit</td>
                 <td> <input type="text" name="quantity" value=""> </td>
-                <td> <input type="submit" name="submit" value="submit"></td>
+                <td> <input class ="btn btn-primary" type="submit" name="submit" value="Cart"></td>
                 <!-- <td> <a class="btn btn-primary" name="submit" value="submit" type="submit">cart</a></td> -->
               </form>
             </tr>
@@ -40,7 +44,7 @@
           <ul class="pagination">
             {% if items.has_previous%}
               <li class="page-item">
-                <a href="?page={{listings.previous_page_number}}" class="page-link">&laquo</a>
+                <a href="?page={{items.previous_page_number}}" class="page-link">&laquo</a>
               </li>
             {% else %}
               <li class="page-item disabled">
@@ -60,7 +64,7 @@
             {% endfor%}
             {% if items.has_next%}
               <li class="page-item">
-                <a href="?page={{listings.next_page_number}}" class="page-link">&raquo</a>
+                <a href="?page={{items.next_page_number}}" class="page-link">&raquo</a>
               </li>
             {% else %}
               <li class="page-item disabled">

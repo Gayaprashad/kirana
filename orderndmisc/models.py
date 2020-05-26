@@ -19,6 +19,7 @@ class Order(models.Model):
     user =models.ForeignKey(User, on_delete=models.DO_NOTHING)
     item = models.ForeignKey(Items, on_delete= models.DO_NOTHING)
     items_id =models.IntegerField(default=0)
+    username= models.CharField(max_length=50,default=None)
     quantity =models.IntegerField()
     def __str__ (self):
         return self.item.name

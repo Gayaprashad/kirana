@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="container">
+    <h1>Menu</h1>
+    <table class="table">
+      <thead>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Address Line 1</th>
+        <th scope="col">Address Line 2</th>
+        <th scope="col">Locality</th>
+        <th scope="col">City</th>
+        <th scope="col">Zipcode</th>
+        <th scope="col">Delete</th>
+      </thead>
+      <tbody>
+        {% if customers %}
+            {% for customer in customers%}
+                <tr>
+                <th scope="row"> {{customer.id}}</th>
+                <td> {{customer.user.username}}</td>
+                <td> {{customer.user.email}}</td>
+                <td> {{customer.phno}}</td>
+                <td> {{customer.adl1}}</td>
+                <td> {{customer.adl2}}</td>
+                <td> {{customer.locality}}</td>
+                <td> {{customer.city}}</td>
+                <td> {{customer.zipcode}}</td>
+                <td> <a class="btn btn-primary" href="{% url 'rem_cust' customer.id%}">Delete</a></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

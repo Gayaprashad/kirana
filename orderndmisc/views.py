@@ -35,7 +35,7 @@ def addcart(request):
          
         temp_order= Temporder(user=user, item=i, item_id= item_id, quantity=quantity)
         temp_order.save()
-        return redirect('item')
+        return redirect('cart')
     else:
         messages.error(request,'The method is not POST')
         return redirect('cart')
@@ -84,9 +84,13 @@ def order(request):
     items = Temporder.objects.all()
 
     for item in items:
-        cur_order= Order(user = item.user, item = item.item, items_id =item.items_id, quantity= item.quantity)
+        cur_order= Order(user = item.user, item = item.item, items_id =item.items_id,username = item.user.username, quantity= item.quantity)
         cur_order.save()
     
     Temporder.objects.all().delete()
     
     return redirect('index')
+
+def emptyuser(request):
+    messages.error(request,'First Login before placing an order')
+    return render(request,'customer/login.html')
