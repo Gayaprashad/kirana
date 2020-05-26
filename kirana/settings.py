@@ -142,3 +142,9 @@ MESSAGE_TAGS={
 }
 
 
+#Production settings
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
